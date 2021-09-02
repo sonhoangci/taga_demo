@@ -59,12 +59,12 @@ const terser = require('gulp-terser');
     basetemp: './.temp'
     },
   dist:{
-    basedist: './dist',
-    js: './dist/assets/js',
-    images: './dist/assets/images',
-    css: './dist/assets/css',
-    fonts: './dist/assets/fonts',
-    libs: './dist/assets/libs'
+    basedist: './docs',
+    js: './docs/assets/js',
+    images: './docs/assets/images',
+    css: './docs/assets/css',
+    fonts: './docs/assets/fonts',
+    libs: './docs/assets/libs'
 
     }
 }
