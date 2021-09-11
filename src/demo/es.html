@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  @@include("../partials/head.html")
+  <title>TAGA ARCHITECTURE DEMO - ELASTIC SEARCH</title>
+
+
+</head>
+
+<body class="bg-white">
+  <!-- Main wrapper -->
+
+  @@include("../partials/doc-navbar.html")
+    <!-- Left sidebar -->
+
+    <div class="pt-9">
+        <div class="container-xxl">
+            <div class="row">
+            <div class="col-lg-2 col-12 position-sticky">
+                @@include("../partials/doc-sidenav.html")
+            </div>
+            <div class="col-lg-8 col-12 p-8">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="mb-10" id="intro">
+                        <h1 class="mb-2">ELASTIC SEARCH</h1>
+                        <p class="mb-0 lead text-dark">Elasticsearch is a search engine based on the Lucene library. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents</p>
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Row -->
+				  
+				  <div class="col-xl-12 col-md-12 col-12 mb-12">
+              <!-- card -->
+              <div class="card">
+                <!-- card body -->
+                <div class="card-body">
+                  <div class="d-flex justify-content-between mb-5
+                      align-items-center">
+                    
+                    <div>
+                     
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <!-- text -->
+                    
+                    <img src="https://d1.awsstatic.com/product-page-diagram_HIW_Amazon-OpenSearch.bccd42c9b855877a40e4eb3c55511a8aae1002a4.png" class="rounded-3 w-100" alt="">
+                  </div>
+                  <!-- icons -->
+                  <!--div class="mb-4">
+                    <span class="me-1 me-md-4"><i data-feather="heart"
+                          class="icon-xxs text-muted me-2"></i><span>20 Like</span></span>
+                    <span class="me-1 me-md-4"><i
+                          data-feather="message-square" class="icon-xxs
+                          text-muted me-2"></i><span>12 Comment</span></span>
+                    <span><i data-feather="share-2" class="icon-xxs
+                          text-muted me-2"></i><span>Share</span></span>
+                  </div-->
+                  
+                  <!-- row -->
+                  
+                </div>
+              </div>
+            </div>
+			
+				  
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="mb-4" >
+                        <h3 class="fw-medium"><a href="#quickstart" name="quickstart" id="quickstart" class="heading-permalink" aria-hidden="true" title="">¶</a>Quick start</h3>
+                        <div class="mt-6" id="css">
+                          <h4 class="mb-2">Search Product</h4>
+                        </div>
+                        <!-- Card -->
+                        <div class="card p-4">
+							<div class="d-grid">
+								<input id='query' name='query' value='q=*&index=products'/>
+								<br/>
+								<br/>
+								<div id="search_result" name="search_result">
+								</div>
+								<iframe id="iframe_result" name="iframe_result" style='width:100%'>
+								</iframe>
+								
+								<button id="do_search" name="do_search" type="submit" class="btn btn-primary">
+									Search
+								</button>
+								<i id="txt_create_result" name="txt_create_result"></i> 
+							</div>
+                        </div>
+						
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="mb-5" id="js">
+                        <div class="mt-3 mb-3">
+                          <h4 class="mb-2" id="token_text" name="token_text" style="color:red">Token NOT Available </h4>
+                        </div>
+                        <!-- Card -->
+                        <div class="card p-4 mt-4 mb-4">
+                          <div class="copy-content copy-content-height">
+                            <div class="code-toolbar">
+                              <pre class="line-numbers language-markup"><code class="language-markup" id="local_token" name="local_token" ></code></pre>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+				  
+
+
+
+
+
+                  
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Wrapper  -->
+
+  </div>
+
+  <!-- Scripts -->
+  @@include("../partials/scripts.html")
+	<script>
+	window.onfocus = function () { 
+	  // do what you need
+			var $token = localStorage.getItem("token");
+			if ($token){
+				$("#token_text").html("TOKEN is READY");
+				$("#token_text").css("color","blue");
+				$("#local_token").html($token);
+			}
+	}; 
+	
+	$(document).ready(function() {
+		//$("#txt_create").val("");
+		$("#do_search").click(function(){
+			//
+			var url = "https://7x8yaegipi.execute-api.us-east-1.amazonaws.com/dev/search?" + $("#query").val();
+			console.log(url);
+			//$("#iframe_result").src = url;
+			$('#iframe_result').attr('src',url);
+			
+			/*
+			
+			$("#txt_create_result").html("");
+			$.ajax({
+				url: url,
+				type: "get",
+				
+				success: function (response) {
+
+				   // You will get response from your PHP page (what you echo or print)
+				   // recheck es
+				   $("#search_result").html(response);	
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+				   console.log(textStatus, errorThrown);
+				}
+			});*/
+		}); 
+		
+		const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+		
+		$("#update_product").click(function(){
+			//
+			var content = $("#txt_update").val();
+			console.log(content);
+			$("#txt_update_result").html("");
+			$.ajax({
+				url: "https://xj9bwafusb.execute-api.us-east-1.amazonaws.com/demo1/v1/enqueue?MessageGroupId=group1&MessageDeduplicationId=" + random(1, 100),
+				type: "post",
+				contentType: "application/json; charset=utf-8",
+				data: content ,
+				success: function (response) {
+
+				   // You will get response from your PHP page (what you echo or print)
+				   // recheck es
+				   $("#txt_update_result").html("Product updated, please check Your email and ES for result");
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+				   console.log(textStatus, errorThrown);
+				}
+			});
+		}); 
+		
+		$("#approve_product").click(function(){
+			//
+			var content = $("#txt_approve").val();
+			console.log(content);
+			$("#txt_approve_result").html("");
+			$.ajax({
+				url: "https://gycqlusd78.execute-api.us-east-1.amazonaws.com/tagademo2",
+				type: "post",
+				contentType: "application/json; charset=utf-8",
+				data: content ,
+				success: function (response) {
+					console.log(response);
+				   // You will get response from your PHP page (what you echo or print)
+				   // recheck es
+				   $("#txt_approve_result").html("Product approved, please check ES for result");
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+				   console.log(textStatus, errorThrown);
+				}
+			});
+		}); 
+		
+		
+		
+	});
+		
+	</script>
+
+</body>
+
+</html>

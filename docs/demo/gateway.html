@@ -30,7 +30,7 @@
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="../assets/css/theme.min.css">
-  <title>TAGA ARCHITECTURE DEMO</title>
+  <title>TAGA ARCHITECTURE DEMO - API GATEWAY</title>
 
 
 </head>
@@ -99,8 +99,8 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                       <div class="mb-10" id="intro">
-                        <h1 class="mb-2">Introduction</h1>
-                        <p class="mb-0 lead text-dark">This is demo for software features in TAGA application.</p>
+                        <h1 class="mb-2">API Gateway</h1>
+                        <p class="mb-0 lead text-dark">API Gateway is a fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs at any scale. APIs act as the "front door" for applications to access data, business logic, or functionality from your backend services</p>
 
                       </div>
                     </div>
@@ -114,35 +114,15 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between mb-5
                       align-items-center">
-                    <!-- avatar -->
-                    <!--div class="d-flex align-items-center">
-                      <div>
-                        <img src="../assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-md rounded-circle">
-                      </div>
-                      <div class="ms-3">
-                        <h5 class="mb-0 fw-bold">Jitu Chauhan</h5>
-                        <p class="mb-0">19 minutes ago</p>
-                      </div>
-                    </div-->
+                    
                     <div>
-                      <!-- dropdown -->
-                      <!--div class="dropdown dropstart">
-                        <a href="#" class="text-muted text-primary-hover" id="dropdownprojectFive" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i data-feather="more-vertical" class="icon-xxs"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownprojectFive">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else
-                              here</a>
-                        </div>
-                      </div-->
+                     
                     </div>
                   </div>
                   <div class="mb-4">
                     <!-- text -->
-                    <p class="mb-4">TAGA System architecture, where things start move on</p>
-                    <img src="../assets/images/ci/9c4500259621607f3930.jpg" class="rounded-3 w-100" alt="">
+                    
+                    <img src="https://d1.awsstatic.com/serverless/New-API-GW-Diagram.c9fc9835d2a9aa00ef90d0ddc4c6402a2536de0d.png" class="rounded-3 w-100" alt="">
                   </div>
                   <!-- icons -->
                   <!--div class="mb-4">
@@ -162,7 +142,79 @@
             </div>
 			
 				  
-                  
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="mb-4" >
+                        <h3 class="fw-medium"><a href="#quickstart" name="quickstart" id="quickstart" class="heading-permalink" aria-hidden="true" title="">¶</a>Quick start</h3>
+                        <div class="mt-6" id="css">
+                          <h4 class="mb-2">Create Product</h4>
+                        </div>
+                        <!-- Card -->
+                        <div class="card p-4">
+							<div class="d-grid">
+								<textarea style='width:100%; height:100px' id="txt_create" name="txt_create" >
+{
+	"name": "1.11092021 test newproduct",
+	"label1": "1 label 1",
+	"label2": "2 label 2",
+	"label3": "3 label 3"
+}
+								</textarea>
+								<br/>
+								<br/>
+								<button id="create_product" name="create_product" type="submit" class="btn btn-primary">
+									Create Product
+								</button>
+								<i id="txt_create_result" name="txt_create_result"></i> 
+							</div>
+                        </div>
+						<div class="mt-6" id="css">
+                          <h4 class="mb-2">Update Product (Enqueue)</h4>
+                        </div>
+                        <!-- Card -->
+                        <div class="card p-4">
+							<div class="d-grid">
+								<textarea style='width:100%; height:100px' id="txt_update" name="txt_update"  >
+{
+  "product_id": "aef19084-8b88-4910-8d8c-c145fe808117",
+  "product_name": "newproduct3",
+  "price": 7777.77,
+  "label1": "label 1",
+  "label2": "label 2",
+  "label3": "label 3"
+}								
+								</textarea>
+								<br/>
+								<br/>
+								<button id="update_product" name="update_product" type="submit" class="btn btn-primary">
+									Update Product
+								</button>
+								  <i id="txt_update_result" name="txt_update_result"></i> 
+							</div>
+                        </div>
+						<div class="mt-6" id="css">
+                          <h4 class="mb-2">Approve Product</h4>
+                        </div>
+                        <!-- Card -->
+                        <div class="card p-4">
+							<div class="d-grid">
+								<textarea style='width:100%; height:100px' id="txt_approve" name="txt_approve">
+{
+  "product_id": "aef19084-8b88-4910-8d8c-c145fe808117",
+  "product_name": "newproduct3"
+}									
+								</textarea>
+								<br/>
+								<br/>
+								<button id="approve_product" name="approve_product" type="submit" class="btn btn-primary">
+									Approve Product
+								</button>
+								 <i id="txt_approve_result" name="txt_approve_result"></i> 
+							</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                       <div class="mb-5" id="js">
@@ -226,6 +278,80 @@
 				$("#local_token").html($token);
 			}
 	}; 
+	
+	$(document).ready(function() {
+		//$("#txt_create").val("");
+		$("#create_product").click(function(){
+			//
+			var content = $("#txt_create").val();
+			console.log(content);
+			$("#txt_create_result").html("");
+			$.ajax({
+				url: "https://45jerqn2u3.execute-api.us-east-1.amazonaws.com/dev/add",
+				type: "post",
+				contentType: "application/json; charset=utf-8",
+				data: content ,
+				success: function (response) {
+
+				   // You will get response from your PHP page (what you echo or print)
+				   // recheck es
+				   $("#txt_create_result").html("Product created, please check ES result");
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+				   console.log(textStatus, errorThrown);
+				}
+			});
+		}); 
+		
+		const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+		
+		$("#update_product").click(function(){
+			//
+			var content = $("#txt_update").val();
+			console.log(content);
+			$("#txt_update_result").html("");
+			$.ajax({
+				url: "https://xj9bwafusb.execute-api.us-east-1.amazonaws.com/demo1/v1/enqueue?MessageGroupId=group1&MessageDeduplicationId=" + random(1, 100),
+				type: "post",
+				contentType: "application/json; charset=utf-8",
+				data: content ,
+				success: function (response) {
+
+				   // You will get response from your PHP page (what you echo or print)
+				   // recheck es
+				   $("#txt_update_result").html("Product updated, please check Your email and ES for result");
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+				   console.log(textStatus, errorThrown);
+				}
+			});
+		}); 
+		
+		$("#approve_product").click(function(){
+			//
+			var content = $("#txt_approve").val();
+			console.log(content);
+			$("#txt_approve_result").html("");
+			$.ajax({
+				url: "https://gycqlusd78.execute-api.us-east-1.amazonaws.com/tagademo2",
+				type: "post",
+				contentType: "application/json; charset=utf-8",
+				data: content ,
+				success: function (response) {
+					console.log(response);
+				   // You will get response from your PHP page (what you echo or print)
+				   // recheck es
+				   $("#txt_approve_result").html("Product approved, please check ES for result");
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+				   console.log(textStatus, errorThrown);
+				}
+			});
+		}); 
+		
+		
+		
+	});
 		
 	</script>
 

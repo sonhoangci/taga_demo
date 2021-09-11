@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  @@include("../partials/head.html")
+  <title>TAGA ARCHITECTURE DEMO</title>
+
+
+</head>
+
+<body class="bg-white">
+  <!-- Main wrapper -->
+
+  @@include("../partials/doc-navbar.html")
+    <!-- Left sidebar -->
+
+    <div class="pt-9">
+        <div class="container-xxl">
+            <div class="row">
+            <div class="col-lg-2 col-12 position-sticky">
+                @@include("../partials/doc-sidenav.html")
+            </div>
+            <div class="col-lg-8 col-12 p-8">
+               
+                  <!-- Row -->
+				  
+				  <div class="col-xl-12 col-md-12 col-12 mb-12">
+              <!-- card -->
+             
+            </div>
+			
+				  
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="mb-4" >
+                        <h3 class="fw-medium"><a href="#quickstart" name="quickstart" id="quickstart" class="heading-permalink" aria-hidden="true" title="">¶</a>Quick start</h3>
+                        <div class="mt-6" id="css">
+                          <h4 class="mb-2">Authorization</h4>
+                        </div>
+                        <!-- Card -->
+                        <div class="card p-4">
+							<div class="d-grid">
+								<img src="../assets/images/ci/cognito.png" class="rounded-3 w-100" alt="">
+								<a type="submit" class="btn btn-primary" href="https://taganow.auth.us-east-1.amazoncognito.com/login?client_id=6n80bl78pso69k29noqt3rtnl&response_type=code&scope=email+openid+phone+profile&redirect_uri=https://sonhoangci.github.io/taga_demo/callback.html" target="_blank">
+									Single Sign-on with AWS Cognito
+								</a>
+								 
+							</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="mb-5" id="js">
+                        <div class="mt-3 mb-3">
+                          <h4 class="mb-2" id="token_text" name="token_text" style="color:red">Token NOT Available </h4>
+                        </div>
+                        <!-- Card -->
+                        <div class="card p-4 mt-4 mb-4">
+                          <div class="copy-content copy-content-height">
+                            <div class="code-toolbar">
+                              <pre class="line-numbers language-markup"><code class="language-markup" id="local_token" name="local_token" ></code></pre>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+				  
+
+
+
+
+
+                  
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Wrapper  -->
+
+  </div>
+
+  <!-- Scripts -->
+  @@include("../partials/scripts.html")
+	<script>
+	window.onfocus = function () { 
+	  // do what you need
+			var $token = localStorage.getItem("token");
+			if ($token){
+				$("#token_text").html("TOKEN is READY");
+				$("#token_text").css("color","blue");
+				$("#local_token").html($token);
+			}
+	}; 
+		
+	</script>
+
+</body>
+
+</html>

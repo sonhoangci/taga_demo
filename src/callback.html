@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    @@include("partials/head.html")
+    <title>Callback from AWS</title>
+  </head>
+
+  <body>
+	<i>Collect session token from AWS:</i>
+	<div id="token" name="token">
+		
+	</div>
+	<div id="content" name="content" style='color:red'>
+		
+	</div>
+	<!-- Scripts -->
+    @@include("partials/scripts.html")
+	<script>
+		function findGetParameter(parameterName) {
+			var result = null,
+				tmp = [];
+			location.search
+				.substr(1)
+				.split("&")
+				.forEach(function (item) {
+				  tmp = item.split("=");
+				  if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+				});
+			return result;
+		}
+		$( document ).ready(function() {
+			console.log( "ready!" );
+			var $token = findGetParameter("code");
+			$("#token").html($token);
+			if ($token){
+				localStorage.setItem("token", $token);
+				$("#content").html("Session storage now saved token for later use on other page '" + 
+				localStorage.getItem("token")
+				+ "'. That is safe to close this single sign-on page result");
+			}
+			
+		});
+	</script>
+    
+
+
+  </body>
+
+</html>

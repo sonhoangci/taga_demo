@@ -30,7 +30,7 @@
 
 <!-- Theme CSS -->
 <link rel="stylesheet" href="../assets/css/theme.min.css">
-  <title>TAGA ARCHITECTURE DEMO</title>
+  <title>TAGA ARCHITECTURE DEMO - ELASTIC SEARCH</title>
 
 
 </head>
@@ -99,8 +99,8 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                       <div class="mb-10" id="intro">
-                        <h1 class="mb-2">Introduction</h1>
-                        <p class="mb-0 lead text-dark">This is demo for software features in TAGA application.</p>
+                        <h1 class="mb-2">ELASTIC SEARCH</h1>
+                        <p class="mb-0 lead text-dark">Elasticsearch is a search engine based on the Lucene library. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents</p>
 
                       </div>
                     </div>
@@ -114,35 +114,15 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between mb-5
                       align-items-center">
-                    <!-- avatar -->
-                    <!--div class="d-flex align-items-center">
-                      <div>
-                        <img src="../assets/images/avatar/avatar-1.jpg" alt="" class="avatar avatar-md rounded-circle">
-                      </div>
-                      <div class="ms-3">
-                        <h5 class="mb-0 fw-bold">Jitu Chauhan</h5>
-                        <p class="mb-0">19 minutes ago</p>
-                      </div>
-                    </div-->
+                    
                     <div>
-                      <!-- dropdown -->
-                      <!--div class="dropdown dropstart">
-                        <a href="#" class="text-muted text-primary-hover" id="dropdownprojectFive" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i data-feather="more-vertical" class="icon-xxs"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownprojectFive">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else
-                              here</a>
-                        </div>
-                      </div-->
+                     
                     </div>
                   </div>
                   <div class="mb-4">
                     <!-- text -->
-                    <p class="mb-4">TAGA System architecture, where things start move on</p>
-                    <img src="../assets/images/ci/9c4500259621607f3930.jpg" class="rounded-3 w-100" alt="">
+                    
+                    <img src="https://d1.awsstatic.com/product-page-diagram_HIW_Amazon-OpenSearch.bccd42c9b855877a40e4eb3c55511a8aae1002a4.png" class="rounded-3 w-100" alt="">
                   </div>
                   <!-- icons -->
                   <!--div class="mb-4">
@@ -162,7 +142,34 @@
             </div>
 			
 				  
-                  
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="mb-4" >
+                        <h3 class="fw-medium"><a href="#quickstart" name="quickstart" id="quickstart" class="heading-permalink" aria-hidden="true" title="">¶</a>Quick start</h3>
+                        <div class="mt-6" id="css">
+                          <h4 class="mb-2">Search Product</h4>
+                        </div>
+                        <!-- Card -->
+                        <div class="card p-4">
+							<div class="d-grid">
+								<input id='query' name='query' value='q=*&index=products'/>
+								<br/>
+								<br/>
+								<div id="search_result" name="search_result">
+								</div>
+								<iframe id="iframe_result" name="iframe_result" style='width:100%'>
+								</iframe>
+								
+								<button id="do_search" name="do_search" type="submit" class="btn btn-primary">
+									Search
+								</button>
+								<i id="txt_create_result" name="txt_create_result"></i> 
+							</div>
+                        </div>
+						
+                      </div>
+                    </div>
+                  </div>
                   <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                       <div class="mb-5" id="js">
@@ -226,6 +233,84 @@
 				$("#local_token").html($token);
 			}
 	}; 
+	
+	$(document).ready(function() {
+		//$("#txt_create").val("");
+		$("#do_search").click(function(){
+			//
+			var url = "https://7x8yaegipi.execute-api.us-east-1.amazonaws.com/dev/search?" + $("#query").val();
+			console.log(url);
+			//$("#iframe_result").src = url;
+			$('#iframe_result').attr('src',url);
+			
+			/*
+			
+			$("#txt_create_result").html("");
+			$.ajax({
+				url: url,
+				type: "get",
+				
+				success: function (response) {
+
+				   // You will get response from your PHP page (what you echo or print)
+				   // recheck es
+				   $("#search_result").html(response);	
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+				   console.log(textStatus, errorThrown);
+				}
+			});*/
+		}); 
+		
+		const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+		
+		$("#update_product").click(function(){
+			//
+			var content = $("#txt_update").val();
+			console.log(content);
+			$("#txt_update_result").html("");
+			$.ajax({
+				url: "https://xj9bwafusb.execute-api.us-east-1.amazonaws.com/demo1/v1/enqueue?MessageGroupId=group1&MessageDeduplicationId=" + random(1, 100),
+				type: "post",
+				contentType: "application/json; charset=utf-8",
+				data: content ,
+				success: function (response) {
+
+				   // You will get response from your PHP page (what you echo or print)
+				   // recheck es
+				   $("#txt_update_result").html("Product updated, please check Your email and ES for result");
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+				   console.log(textStatus, errorThrown);
+				}
+			});
+		}); 
+		
+		$("#approve_product").click(function(){
+			//
+			var content = $("#txt_approve").val();
+			console.log(content);
+			$("#txt_approve_result").html("");
+			$.ajax({
+				url: "https://gycqlusd78.execute-api.us-east-1.amazonaws.com/tagademo2",
+				type: "post",
+				contentType: "application/json; charset=utf-8",
+				data: content ,
+				success: function (response) {
+					console.log(response);
+				   // You will get response from your PHP page (what you echo or print)
+				   // recheck es
+				   $("#txt_approve_result").html("Product approved, please check ES for result");
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+				   console.log(textStatus, errorThrown);
+				}
+			});
+		}); 
+		
+		
+		
+	});
 		
 	</script>
 
